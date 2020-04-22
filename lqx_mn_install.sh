@@ -9,27 +9,15 @@ echo " "
 sudo apt update
 
 echo " "
-echo "=============================="
-echo "Instalando pacotes necessários"
-echo "=============================="
+echo "============================="
+echo "Instalando pacotes adicionais"
+echo "============================="
 echo " "
 
 sudo apt install net-tools
 sudo apt install sudo
 
 sudo apt install curl ufw wget git python3 python3-pip virtualenv -y
-
-echo " "
-echo "============================="
-echo "Aplicando regras de firewall"
-echo "============================="
-echo " "
-
-sudo ufw allow ssh/tcp
-sudo ufw allow 9999/tcp
-sudo ufw logging on
-sudo ufw enable
-sudo ufw allow 5784
 
 echo " "
 echo "========================"
