@@ -2,7 +2,7 @@
 
 echo " "
 echo "========================================"
-echo "Iniciando instalalação do masternode LQX"
+echo "Iniciando instalação do masternode LQX"
 echo "========================================"
 echo " "
 
@@ -21,12 +21,11 @@ sudo apt install curl ufw wget git python3 python3-pip virtualenv -y
 
 echo " "
 echo "============================="
-echo "Aplicando regras de fierewall"
+echo "Aplicando regras de firewall"
 echo "============================="
 echo " "
 
 sudo ufw allow ssh/tcp
-sudo ufw limit ssh/tcp
 sudo ufw allow 9999/tcp
 sudo ufw logging on
 sudo ufw enable
@@ -70,9 +69,6 @@ sudo echo -e $TEXTO >> /etc/fail2ban/jail.local
 
 sudo systemctl restart fail2ban
 sudo systemctl enable fail2ban
-
-#sudo sed -i '/PermitRootLogin/s/yes/no/g' /etc/ssh/sshd_config
-#sudo sed -i '$a\' -e 'AllowUsers masternode' /etc/ssh/sshd_conf##ig
 
 echo " "
 echo "================="
