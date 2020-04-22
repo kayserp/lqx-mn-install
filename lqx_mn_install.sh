@@ -1,17 +1,42 @@
 #!/bin/bash
 
+echo " "
+echo "========================================"
+echo "Iniciando instalalação do masternode LQX"
+echo "========================================"
+echo " "
+
 sudo apt update
+
+echo " "
+echo "=============================="
+echo "Instalando pacotes necessários"
+echo "=============================="
+echo " "
 
 sudo apt install net-tools
 sudo apt install sudo
 
 sudo apt install curl ufw wget git python3 python3-pip virtualenv -y
+
+echo " "
+echo "============================="
+echo "Aplicando regras de fierewall"
+echo "============================="
+echo " "
+
 sudo ufw allow ssh/tcp
 sudo ufw limit ssh/tcp
 sudo ufw allow 9999/tcp
 sudo ufw logging on
 sudo ufw enable
 sudo ufw allow 5784
+
+echo " "
+echo "========================"
+echo "Alocando arquivo de swap"
+echo "========================"
+echo " "
 
 sudo fallocate -l 2G /swapfile
 sudo chmod 600 /swapfile
@@ -24,6 +49,12 @@ sudo chmod 777 fstab
 sudo chmod +x fstab
 sudo echo -e $TEXTO >> fstab
 sudo cp fstab /etc/fstab
+
+echo " "
+echo "=================="
+echo "Instalando failban"
+echo "=================="
+echo " "
 
 sudo apt install fail2ban -y
 
@@ -43,6 +74,12 @@ sudo systemctl enable fail2ban
 #sudo sed -i '/PermitRootLogin/s/yes/no/g' /etc/ssh/sshd_config
 #sudo sed -i '$a\' -e 'AllowUsers masternode' /etc/ssh/sshd_conf##ig
 
+echo " "
+echo "================="
+echo "Baixando LQX Core"
+echo "================="
+echo " "
+
 cd /tmp
 git clone https://github.com/kayserp/lqxcore-linux.git
 sudo mkdir ~/.lqxcore
@@ -50,30 +87,11 @@ sudo chmod 777 ~/.lqxcore
 sudo cp -f lqxcore-linux/* ~/.lqxcore/
 sudo chmod +x ~/.lqxcore/*
 
-cd /tmp/config-masternode
-sudo chmod +x *
-sudo cp -f lqx.service /lib/systemd/system/
-sudo systemctl daemon-reload
-systemctl enable lqx
-
-IP=`wget -qO- ifconfig.co/ip`
-
-TEXTO="#----\n
-rpcuser=masternode1\n
-rpcpassword=masternode1\n
-rpcallowip=127.0.0.1\n
-#----\n
-listen=1\n
-server=1\n
-daemon=1\n
-#----\n
-#masternode=1\n
-#masternodeblsprivkey="$1"\n
-#externalip="$IP
-
-sudo touch ~/.lqxcore/lqx.conf
-sudo chmod 777 ~/.lqxcore/lqx.conf
-sudo echo -e $TEXTO >> ~/.lqxcore/lqx.conf
+echo " "
+echo "============================="
+echo "Configurando serviço LQX Core"
+echo "============================="
+echo " "
 
 sudo tee /etc/systemd/system/lqx.service <<EOF
 [Unit]
@@ -99,9 +117,51 @@ EOF
 
 sudo systemctl enable lqx
 sudo systemctl start lqx
-echo "Booting LQX node and creating keypool"
 
-echo "Installing sentinel engine"
+echo " "
+echo "=================================================="
+echo "Iicializando LQX node e criando conjunto de chaves"
+echo "=================================================="
+echo " "
+
+sleep 120
+
+echo " "
+echo "====================="
+echo "Configurando lqx.conf"
+echo "====================="
+echo " "
+
+IP=`wget -qO- ifconfig.co/ip`
+PRIVATE_KEY="teste"
+
+TEXTO="#----\n
+rpcuser=masternode1\n
+rpcpassword=masternode1\n
+rpcallowip=127.0.0.1\n
+#----\n
+listen=1\n
+server=1\n
+daemon=1\n
+#----\n
+masternode=1\n
+masternodeblsprivkey="$PRIVATE_KEY"\n
+externalip="$IP
+
+sudo touch ~/.lqxcore/lqx.conf
+sudo chmod 777 ~/.lqxcore/lqx.conf
+sudo echo -e $TEXTO >> ~/.lqxcore/lqx.conf
+
+sudo systemctl stop lqx
+sleep 30
+sudo systemctl start lqx
+
+echo " "
+echo "=========================="
+echo "Instalando Sentinel Engine"
+echo "=========================="
+echo " "
+
 sudo git clone https://github.com/kayserp/sentinel.git ~/.lqxcore/sentinel/
 cd ~/.lqxcore/sentinel/
 sudo virtualenv -p python3 ./venv
