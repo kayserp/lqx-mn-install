@@ -72,35 +72,31 @@ sudo cp -f lqxcore-linux/* ~/.lqxcore/
 sudo chmod +x ~/.lqxcore/*
 
 echo " "
-echo "============================="
-echo "Configurando serviço LQX Core"
-echo "============================="
+echo "=================================="
+echo "Configurando inicialização no boot"
+echo "=================================="
 echo " "
 
-sudo tee /etc/systemd/system/lqx.service <<EOF
-[Unit]
-Description=lqx, distributed currency daemon
-After=network.target
+sudo tee /etc/rc.local <<EOF
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
 
-[Service]
-User=root
-Group=root
-WorkingDirectory=/
-ExecStart=/root/.lqxcore/lqxd
+~/.lqxcore/lqxd
 
-Restart=always
-PrivateTmp=true
-TimeoutStopSec=60s
-TimeoutStartSec=2s
-StartLimitInterval=120s
-StartLimitBurst=5
-
-[Install]
-WantedBy=multi-user.target
+exit 0
 EOF
 
-sudo systemctl enable lqx
-sudo systemctl start lqx
+~/.lqxcore/lqxd
 
 echo " "
 echo "=================================================="
