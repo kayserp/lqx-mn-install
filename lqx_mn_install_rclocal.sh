@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo " "
-echo "========================================"
+echo "======================================"
 echo "Iniciando instalação do masternode LQX"
-echo "========================================"
+echo "======================================"
 echo " "
 
 sudo apt update
@@ -137,8 +137,8 @@ sudo chmod 777 ~/.lqxcore/lqx.conf
 sudo echo -e $TEXTO >> ~/.lqxcore/lqx.conf
 
 sudo ~/.lqxcore/lqx-cli stop
+echo "Aguarde 30 segundos..."
 sleep 30
-echo "Aguarde 30 segundos...
 sudo ~/.lqxcore/lqxd
 
 echo " "
