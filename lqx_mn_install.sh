@@ -103,9 +103,9 @@ sudo systemctl enable lqx
 sudo systemctl start lqx
 
 echo " "
-echo "=================================================="
+echo "==================================================="
 echo "Inicializando LQX node e criando conjunto de chaves"
-echo "=================================================="
+echo "==================================================="
 echo " "
 
 sleep 120

@@ -96,12 +96,12 @@ sudo tee /etc/rc.local <<EOF
 exit 0
 EOF
 
-~/.lqxcore/lqxd
+sudo ~/.lqxcore/lqxd
 
 echo " "
-echo "=================================================="
+echo "==================================================="
 echo "Inicializando LQX node e criando conjunto de chaves"
-echo "=================================================="
+echo "==================================================="
 echo " "
 
 sleep 120
@@ -119,6 +119,9 @@ TEXTO="#----\n
 rpcuser=masternode1\n
 rpcpassword=masternode1\n
 rpcallowip=127.0.0.1\n
+connect=177.38.215.23:5784
+connect=177.38.215.55:5784
+connect=177.38.215.56:5784
 #----\n
 listen=1\n
 server=1\n
@@ -132,9 +135,9 @@ sudo touch ~/.lqxcore/lqx.conf
 sudo chmod 777 ~/.lqxcore/lqx.conf
 sudo echo -e $TEXTO >> ~/.lqxcore/lqx.conf
 
-sudo systemctl stop lqx
+sudo ~/.lqxcore/lqx-cli stop
 sleep 30
-sudo systemctl start lqx
+sudo ~/.lqxcore/lqxd
 
 echo " "
 echo "=========================="
