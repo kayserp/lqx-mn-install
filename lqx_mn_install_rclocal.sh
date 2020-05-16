@@ -102,7 +102,7 @@ echo " "
 echo "==================================================="
 echo "Inicializando LQX node e criando conjunto de chaves"
 echo "==================================================="
-echo " "
+echo " Aguarde 120 segundos..."
 
 sleep 120
 
@@ -137,6 +137,7 @@ sudo echo -e $TEXTO >> ~/.lqxcore/lqx.conf
 
 sudo ~/.lqxcore/lqx-cli stop
 sleep 30
+echo "Aguarde 30 segundos...
 sudo ~/.lqxcore/lqxd
 
 echo " "
