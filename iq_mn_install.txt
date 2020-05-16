@@ -1,0 +1,97 @@
+#!/bin/bash
+#
+# Copyright (C) 2018 IQcash Team
+#
+# mn_install.sh is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# mn_install.sh is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Lesser General Public License for more details.
+# 
+# You should have received a copy of the GNU Lesser General Public License
+# along with mn_install.sh. If not, see <http://www.gnu.org/licenses/>
+#
+
+# Only Ubuntu 16.04 supported at this moment.
+
+set -o errexit
+
+# OS_VERSION_ID=`gawk -F= '/^VERSION_ID/{print $2}' /etc/os-release | tr -d '"'`
+
+sudo apt-get update
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+sudo apt install curl wget git python3 python3-pip virtualenv -y
+
+IQ_DAEMON_USER_PASS=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo ""`
+IQ_DAEMON_RPC_PASS=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 ; echo ""`
+MN_NAME_PREFIX=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 6 ; echo ""`
+MN_EXTERNAL_IP=`curl -s -4 ifconfig.co`
+
+sudo useradd -U -m iqcash -s /bin/bash
+echo "iqcash:${IQ_DAEMON_USER_PASS}" | sudo chpasswd
+sudo wget https://github.com/IQ-Cash/iqcash/releases/download/v0.8.2.2/iqcash-cli-linux.tar.gz --directory-prefix /home/iqcash/
+sudo tar -xzvf /home/iqcash/iqcash-cli-linux.tar.gz -C /home/iqcash/
+sudo rm /home/iqcash/iqcash-cli-linux.tar.gz
+sudo mkdir /home/iqcash/.iqcashcore/
+sudo chown -R iqcash:iqcash /home/iqcash/iqcash*
+sudo chmod 755 /home/iqcash/iqcash*
+echo -e "rpcuser=iqcashrpc\nrpcpassword=${IQ_DAEMON_RPC_PASS}\nlisten=1\nserver=1\nrpcallowip=127.0.0.1\nmaxconnections=256" | sudo tee /home/iqcash/.iqcashcore/iqcash.conf
+sudo chown -R iqcash:iqcash /home/iqcash/.iqcashcore/
+sudo chown 500 /home/iqcash/.iqcashcore/iqcash.conf
+
+sudo tee /etc/systemd/system/iqcash.service <<EOF
+[Unit]
+Description=IQcash, distributed currency daemon
+After=network.target
+
+[Service]
+User=iqcash
+Group=iqcash
+WorkingDirectory=/home/iqcash/
+ExecStart=/home/iqcash/iqcashd
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl enable iqcash
+sudo systemctl start iqcash
+echo "Booting IQ node and creating keypool"
+sleep 120
+
+MNGENKEY=`sudo -H -u iqcash /home/iqcash/iqcash-cli masternode genkey`
+echo -e "masternode=1\nmasternodeprivkey=${MNGENKEY}\nexternalip=${MN_EXTERNAL_IP}:14014" | sudo tee -a /home/iqcash/.iqcashcore/iqcash.conf
+sudo systemctl restart iqcash
+
+echo "Installing sentinel engine"
+sudo git clone https://github.com/IQ-Cash/sentinel.git /home/iqcash/sentinel/
+sudo chown -R iqcash:iqcash /home/iqcash/sentinel/
+cd /home/iqcash/sentinel/
+sudo -H -u iqcash virtualenv -p python3 ./venv
+sudo -H -u iqcash ./venv/bin/pip install -r requirements.txt
+echo "* * * * * iqcash cd /home/iqcash/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" | sudo tee /etc/cron.d/iqcash_sentinel
+sudo chmod 644 /etc/cron.d/iqcash_sentinel
+
+echo " "
+echo " "
+echo "==============================="
+echo "Masternode installed!"
+echo "==============================="
+echo "Copy and keep that information in secret:"
+echo "Masternode key: ${MNGENKEY}"
+echo "SSH password for user \"iqcash\": ${IQ_DAEMON_USER_PASS}"
+echo "Prepared masternode.conf string:"
+echo "mn_${MN_NAME_PREFIX} ${MN_EXTERNAL_IP}:14014 ${MNGENKEY} INPUTTX INPUTINDEX"
+
+exit 0
