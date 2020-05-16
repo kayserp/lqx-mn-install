@@ -113,8 +113,8 @@ echo "====================="
 echo " "
 
 IP=`wget -qO- ifconfig.co/ip`
-#PRIVATE_KEY="teste"
-PRIVATE_KEY=~/.lqxcore/lqx-cli bls generate
+PRIVATE_KEY="teste"
+#PRIVATE_KEY=~/.lqxcore/lqx-cli bls generate
 
 TEXTO="#----\n
 rpcuser=masternode1\n
@@ -124,22 +124,22 @@ connect=177.38.215.23:5784\n
 connect=177.38.215.55:5784\n
 connect=177.38.215.56:5784\n
 #----\n
-listen=1\n
-server=1\n
-daemon=1\n
+#listen=1\n
+#server=1\n
+#daemon=1\n
 #----\n
-masternode=1\n
-masternodeblsprivkey="$PRIVATE_KEY"\n
-externalip="$IP
+#masternode=1\n
+#masternodeblsprivkey="$PRIVATE_KEY"\n
+#externalip="$IP
 
 sudo touch ~/.lqxcore/lqx.conf
 sudo chmod 777 ~/.lqxcore/lqx.conf
 sudo echo -e $TEXTO >> ~/.lqxcore/lqx.conf
 
-sudo ~/.lqxcore/lqx-cli stop
-echo "Aguarde 30 segundos..."
-sleep 30
-sudo ~/.lqxcore/lqxd
+#sudo ~/.lqxcore/lqx-cli stop
+#echo "Aguarde 30 segundos..."
+#sleep 30
+#sudo ~/.lqxcore/lqxd
 
 echo " "
 echo "=========================="
