@@ -70,7 +70,6 @@ sudo mkdir ~/.lqxcore
 sudo chmod 777 ~/.lqxcore
 sudo cp -f lqxcore-linux/* ~/.lqxcore/
 sudo chmod +x ~/.lqxcore/*
-sudo chmod 777 ~/.lqxcore/*
 
 echo " "
 echo "=================================="
@@ -98,6 +97,7 @@ exit 0
 EOF
 
 sudo ~/.lqxcore/lqxd
+sudo chmod 777 ~/.lqxcore/*
 
 echo " "
 echo "==================================================="
