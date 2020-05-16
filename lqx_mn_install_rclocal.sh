@@ -69,8 +69,8 @@ git clone https://github.com/kayserp/lqxcore-linux.git
 sudo mkdir ~/.lqxcore
 sudo chmod 777 ~/.lqxcore
 sudo cp -f lqxcore-linux/* ~/.lqxcore/
-sudo chmod 777 ~/.lqxcore/*
 sudo chmod +x ~/.lqxcore/*
+sudo chmod 777 ~/.lqxcore/*
 
 echo " "
 echo "=================================="
