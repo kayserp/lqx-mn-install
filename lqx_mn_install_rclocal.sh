@@ -69,6 +69,7 @@ git clone https://github.com/kayserp/lqxcore-linux.git
 sudo mkdir ~/.lqxcore
 sudo chmod 777 ~/.lqxcore
 sudo cp -f lqxcore-linux/* ~/.lqxcore/
+sudo chmod 777 ~/.lqxcore/*
 sudo chmod +x ~/.lqxcore/*
 
 echo " "
@@ -102,9 +103,9 @@ echo " "
 echo "==================================================="
 echo "Inicializando LQX node e criando conjunto de chaves"
 echo "==================================================="
-echo " Aguarde 120 segundos..."
+#echo " Aguarde 120 segundos..."
 
-sleep 120
+#sleep 120
 
 echo " "
 echo "====================="
