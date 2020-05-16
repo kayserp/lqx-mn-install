@@ -123,9 +123,6 @@ TEXTO="#----\n
 rpcuser=masternode1\n
 rpcpassword=masternode1\n
 rpcallowip=127.0.0.1\n
-connect=177.38.215.23:5784\n
-connect=177.38.215.55:5784\n
-connect=177.38.215.56:5784\n
 #----\n
 listen=1\n
 server=1\n
