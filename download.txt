@@ -1,1 +1,2 @@
 curl -sL https://raw.githubusercontent.com/kayserp/lqx-mn-install/master/lqx_mn_install.sh | sudo -E bash -
+curl -sL https://raw.githubusercontent.com/kayserp/lqx-mn-install/master/lqx_mn_install_rclocal.sh | sudo -E bash -
