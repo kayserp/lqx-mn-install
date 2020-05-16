@@ -113,7 +113,8 @@ echo "====================="
 echo " "
 
 IP=`wget -qO- ifconfig.co/ip`
-PRIVATE_KEY="teste"
+#PRIVATE_KEY="teste"
+PRIVATE_KEY=~/.lqxcore/lqx-cli bls generate
 
 TEXTO="#----\n
 rpcuser=masternode1\n
