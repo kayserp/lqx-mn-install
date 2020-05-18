@@ -124,9 +124,9 @@ EOF
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
 
 echo " "
-echo "===================================================="
+echo "====================================================="
 echo "Inicializando LQX node 1 e criando conjunto de chaves"
-echo "===================================================="
+echo "====================================================="
 #echo " Aguarde 120 segundos..."
 
 sleep 120
@@ -174,9 +174,9 @@ sleep 30
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
 
 echo " "
-echo "===================================================="
+echo "====================================================="
 echo "Inicializando LQX node 2 e criando conjunto de chaves"
-echo "===================================================="
+echo "====================================================="
 #echo " Aguarde 120 segundos..."
 
 sleep 120

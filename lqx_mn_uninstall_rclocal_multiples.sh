@@ -1,5 +1,10 @@
 rm -rf /tmp/lqxcore-linux/
-deluser -remove-all-files nm01
-deluser -remove-all-files nm02
+
+userdel nm01
+rm -rf /home/nm01
+userdel nm02
+rm -rf /home/nm02
+
 rm -rf etc/rc.local
+rm -rf /etc/fail2ban/jail.local
 rm -rf /etc/cron.d/lqx_sentinel
