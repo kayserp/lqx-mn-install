@@ -64,8 +64,8 @@ echo "Criando usuários múltiplos"
 echo "=========================="
 echo " "
 
-echo -e "Senha@2020@\n" | sudo adduser -home /home/nm01 nm01
-echo -e "Senha@2020@\n" | sudo adduser -home /home/nm02 nm02
+echo -e "Senha@2020@\n" | sudo adduser nm01
+echo -e "Senha@2020@\n" | sudo adduser nm02
 
 echo " "
 echo "================="
@@ -82,18 +82,13 @@ sudo mkdir /home/nm02/.lqxcore
 sudo chmod 777 /home/nm01/.lqxcore
 sudo chmod 777 /home/nm02/.lqxcore
 
+sudo chmod +x lqxcore/lqx-cli
+sudo chmod +x lqxcore/lqxd
+sudo chmod +x lqxcore/lqx-qt
+sudo chmod +x lqxcore/lqx-tx
+
 sudo cp -f lqxcore-linux/* /home/nm01/.lqxcore
 sudo cp -f lqxcore-linux/* /home/nm02/.lqxcore
-
-sudo chmod +x /home/nm01/.lqxcore/lqx-cli
-sudo chmod +x /home/nm01/.lqxcore/lqxd
-sudo chmod +x /home/nm01/.lqxcore/lqx-qt
-sudo chmod +x /home/nm01/.lqxcore/lqx-tx
-
-sudo chmod +x /home/nm02/.lqxcore/lqx-cli
-sudo chmod +x /home/nm02/.lqxcore/lqxd
-sudo chmod +x /home/nm02/.lqxcore/lqx-qt
-sudo chmod +x /home/nm02/.lqxcore/lqx-tx
 
 echo " "
 echo "=================================="
@@ -158,13 +153,13 @@ connect=177.38.215.61:5784
 #masternodeblsprivkey="$PRIVATE_KEY"\n
 #externalip="$IP
 
-sudo touch /home/nm01/.lqxcore/lqx.conf
-sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
-sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
+#sudo touch /home/nm01/.lqxcore/lqx.conf
+#sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
+#sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
 
-sudo touch /home/nm02/.lqxcore/lqx.conf
-sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
-sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
+#sudo touch /home/nm02/.lqxcore/lqx.conf
+#sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
+#sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
 
 #sudo ~/.lqxcore/lqx-cli stop
 #echo "Aguarde 30 segundos..."
