@@ -95,32 +95,6 @@ sudo chmod +x /home/nm02/.lqxcore/lqxd
 sudo chmod +x /home/nm02/.lqxcore/lqx-qt
 sudo chmod +x /home/nm02/.lqxcore/lqx-tx
 
-echo " "
-echo "=================================="
-echo "Configurando inicialização no boot"
-echo "=================================="
-echo " "
-
-sudo tee /etc/rc.local <<EOF
-#!/bin/sh -e
-#
-# rc.local
-#
-# This script is executed at the end of each multiuser runlevel.
-# Make sure that the script will "exit 0" on success or any other
-# value on error.
-#
-# In order to enable or disable this script just change the execution
-# bits.
-#a
-# By default this script does nothing.
-
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
-sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
-
-#exit 0
-EOF
-
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
 
 echo " "
@@ -144,8 +118,8 @@ PRIVATE_KEY="teste"
 TEXTO="#----\n
 rpcuser=masternode1\n
 rpcpassword=masternode1\n
-rpcallowip=127.0.0.1\n
 rpcport=5783
+rpcallowip=127.0.0.1\n
 connect=177.38.215.55:5784
 connect=177.38.215.56:5784
 connect=177.38.215.61:5784
@@ -162,16 +136,13 @@ sudo touch /home/nm01/.lqxcore/lqx.conf
 sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
 sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
 
-sudo touch /home/nm02/.lqxcore/lqx.conf
-sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
-sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
-
 sudo /home/nm01/.lqxcore/lqx-cli stop
-sudo /home/nm02/.lqxcore/lqx-cli stop
 echo "Aguarde 30 segundos..."
 sleep 30
 
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
+
+sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 
 echo " "
 echo "====================================================="
@@ -208,20 +179,19 @@ connect=177.38.215.61:5784
 #masternodeblsprivkey="$PRIVATE_KEY"\n
 #externalip="$IP
 
-sudo touch /home/nm01/.lqxcore/lqx.conf
-sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
-sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
+sudo touch /home/nm02/.lqxcore/lqx.conf
+sudo chmod 777 /home/nm02/.lqxcore/lqx.conf
+sudo echo -e $TEXTO >> /home/nm02/.lqxcore/lqx.conf
 
 sudo touch /home/nm02/.lqxcore/lqx.conf
-sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
-sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
+sudo chmod 777 /home/nm02/.lqxcore/lqx.conf
+sudo echo -e $TEXTO >> /home/nm02/.lqxcore/lqx.conf
 
-sudo /home/nm01/.lqxcore/lqx-cli stop
 sudo /home/nm02/.lqxcore/lqx-cli stop
 echo "Aguarde 30 segundos..."
 sleep 30
 
-sudo -H -u nm02 bash -c "/home/nm01/.lqxcore/lqxd"
+sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 
 echo " "
 echo "=========================="
@@ -235,6 +205,32 @@ sudo virtualenv -p python3 ./venv
 sudo ./venv/bin/pip install -r requirements.txt
 echo "* * * * * lqx cd ~/.lqxcore/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" | sudo tee /etc/cron.d/lqx_sentinel
 sudo chmod 644 /etc/cron.d/lqx_sentinel
+
+echo " "
+echo "=================================="
+echo "Configurando inicialização no boot"
+echo "=================================="
+echo " "
+
+sudo tee /etc/rc.local <<EOF
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#a
+# By default this script does nothing.
+
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
+sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
+
+#exit 0
+EOF
 
 echo " "
 echo "====================="
