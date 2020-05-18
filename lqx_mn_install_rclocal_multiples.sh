@@ -25,7 +25,7 @@ echo "Alocando arquivo de swap"
 echo "========================"
 echo " "
 
-sudo fallocate -l 2G /swapfile
+sudo fallocate -l 4G /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
@@ -64,8 +64,13 @@ echo "Criando usuários múltiplos"
 echo "=========================="
 echo " "
 
-echo -e "Senha@2020@\n" | sudo adduser nm01
-echo -e "Senha@2020@\n" | sudo adduser nm02
+USER_PASS=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo ""`
+
+sudo useradd -U -m nm01 -s /bin/bash
+echo "nm01:${USER_PASS}" | sudo chpasswd
+
+sudo useradd -U -m nm02 -s /bin/bash
+echo "nm02:${USER_PASS}" | sudo chpasswd
 
 echo " "
 echo "================="
@@ -101,7 +106,7 @@ echo " "
 echo "====================================================="
 echo "Inicializando LQX node 1 e criando conjunto de chaves"
 echo "====================================================="
-#echo " Aguarde 120 segundos..."
+echo " Aguarde 120 segundos..."
 
 sleep 120
 
@@ -148,7 +153,7 @@ echo " "
 echo "====================================================="
 echo "Inicializando LQX node 2 e criando conjunto de chaves"
 echo "====================================================="
-#echo " Aguarde 120 segundos..."
+echo " Aguarde 120 segundos..."
 
 sleep 120
 
