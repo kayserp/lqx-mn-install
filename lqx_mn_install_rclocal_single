@@ -59,9 +59,9 @@ sudo systemctl restart fail2ban
 sudo systemctl enable fail2ban
 
 echo " "
-echo "=========================="
-echo "Criando usuários múltiplos"
-echo "=========================="
+echo "==============="
+echo "Criando usuário"
+echo "==============="
 echo " "
 
 USER_PASS="Teste@2020@"
@@ -70,11 +70,6 @@ echo "Criando usuário nm01..."
 
 sudo useradd -U -m nm01 -s /bin/bash
 echo "nm01:${USER_PASS}" | sudo chpasswd
-
-echo "Criando usuário nm02..."
-
-sudo useradd -U -m nm02 -s /bin/bash
-echo "nm02:${USER_PASS}" | sudo chpasswd
 
 echo " "
 echo "================="
@@ -89,37 +84,17 @@ echo " "
 echo "Copiando arquivos para home de usuários..."
 
 sudo mkdir /home/nm01/.lqxcore
-sudo mkdir /home/nm02/.lqxcore
 
 chown -R nm01 /home/nm01/.lqxcore
-chown -R nm02 /home/nm02/.lqxcore
 
 sudo chmod -R 3777 /home/nm01/.lqxcore
-sudo chmod -R 3777 /home/nm02/.lqxcore
 
 sudo cp -f lqxcore-linux/* /home/nm01/.lqxcore
-sudo cp -f lqxcore-linux/* /home/nm02/.lqxcore
 
 sudo chmod +x /home/nm01/.lqxcore/lqx-cli
 sudo chmod +x /home/nm01/.lqxcore/lqxd
 sudo chmod +x /home/nm01/.lqxcore/lqx-qt
 sudo chmod +x /home/nm01/.lqxcore/lqx-tx
-
-sudo chmod +x /home/nm02/.lqxcore/lqx-cli
-sudo chmod +x /home/nm02/.lqxcore/lqxd
-sudo chmod +x /home/nm02/.lqxcore/lqx-qt
-sudo chmod +x /home/nm02/.lqxcore/lqx-tx
-
-echo " "
-echo "====================================================="
-echo "Inicializando LQX node 1 e criando conjunto de chaves"
-echo "====================================================="
-
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
-
-echo " Aguarde 120 segundos..."
-
-sleep 120
 
 echo " "
 echo "====================="
@@ -152,65 +127,12 @@ sudo touch /home/nm01/.lqxcore/lqx.conf
 sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
 sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
 
-sudo sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqx-cli --rpcuser=masternode1 --rpcpassword=masternode1 stop"
-echo "Aguarde 30 segundos..."
-sleep 30
-
-echo "Reiniciando node 1..."
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
-
 echo " "
-echo "====================================================="
-echo "Inicializando LQX node 2 e criando conjunto de chaves"
-echo "====================================================="
+echo "==================================================="
+echo "Inicializando LQX node e criando conjunto de chaves"
+echo "==================================================="
 
-sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
-
-echo " Aguarde 120 segundos..."
-
-sleep 120
-
-echo " "
-echo "====================="
-echo "Configurando lqx.conf"
-echo "====================="
-echo " "
-
-IP=`wget -qO- ifconfig.co/ip`
-PRIVATE_KEY="teste"
-#PRIVATE_KEY=~/.lqxcore/lqx-cli bls generate
-
-TEXTO="#----\n
-rpcuser=masternode2\n
-rpcpassword=masternode2\n
-rpcallowip=127.0.0.1\n
-rpcport=5782
-connect=177.38.215.55:5784
-connect=177.38.215.56:5784
-connect=177.38.215.61:5784
-#----\n
-#listen=1\n
-#server=1\n
-#daemon=1\n
-#----\n
-#masternode=1\n
-#masternodeblsprivkey="$PRIVATE_KEY"\n
-#externalip="$IP
-
-sudo touch /home/nm02/.lqxcore/lqx.conf
-sudo chmod 777 /home/nm02/.lqxcore/lqx.conf
-sudo echo -e $TEXTO >> /home/nm02/.lqxcore/lqx.conf
-
-sudo touch /home/nm02/.lqxcore/lqx.conf
-sudo chmod 777 /home/nm02/.lqxcore/lqx.conf
-sudo echo -e $TEXTO >> /home/nm02/.lqxcore/lqx.conf
-
-sudo sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqx-cli stop"
-echo "Aguarde 30 segundos..."
-sleep 30
-
-echo "Reiniciando node 2..."
-sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
 
 echo " "
 echo "=========================="
