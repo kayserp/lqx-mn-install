@@ -64,8 +64,8 @@ echo "Criando usuários múltiplos"
 echo "=========================="
 echo " "
 
-sudo adduser -home /home/nm01 nm01
-sudo adduser -home /home/nm02 nm02
+echo -e "Senha@2020@\n" | sudo adduser -home /home/nm01 nm01
+echo -e "Senha@2020@\n" | sudo adduser -home /home/nm02 nm02
 
 echo " "
 echo "================="
