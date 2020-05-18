@@ -85,6 +85,7 @@ echo " "
 cd /tmp
 git clone https://github.com/kayserp/lqxcore-linux.git
 
+echo " "
 echo "Copiando arquivos para home de usuários..."
 
 sudo mkdir /home/nm01/.lqxcore
@@ -106,12 +107,13 @@ sudo chmod +x /home/nm02/.lqxcore/lqx-tx
 sudo chmod 777 /home/nm01/.lqxcore
 sudo chmod 777 /home/nm02/.lqxcore
 
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
-
 echo " "
 echo "====================================================="
 echo "Inicializando LQX node 1 e criando conjunto de chaves"
 echo "====================================================="
+
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
+
 echo " Aguarde 120 segundos..."
 
 sleep 120
@@ -151,14 +153,16 @@ sudo /home/nm01/.lqxcore/lqx-cli stop
 echo "Aguarde 30 segundos..."
 sleep 30
 
+echo "Reiniciando node 1..."
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
-
-sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 
 echo " "
 echo "====================================================="
 echo "Inicializando LQX node 2 e criando conjunto de chaves"
 echo "====================================================="
+
+sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
+
 echo " Aguarde 120 segundos..."
 
 sleep 120
@@ -202,6 +206,7 @@ sudo /home/nm02/.lqxcore/lqx-cli stop
 echo "Aguarde 30 segundos..."
 sleep 30
 
+echo "Reiniciando node 2..."
 sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 
 echo " "
