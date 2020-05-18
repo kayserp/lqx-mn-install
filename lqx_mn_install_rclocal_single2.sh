@@ -51,13 +51,13 @@ echo "====================="
 echo " "
 echo "Feito!"
 
-IP=`wget -qO- ifconfig.co/ip`
-PRIVATE_KEY="teste"
+IP="152.44.40.253"
+PRIVATE_KEY="57b48bb6552b49384113a3178e9f42238fdb8be6841b52da0d12ac395232533f"
 RPCPORT="9998"
 
 TEXTO="#----\n
 rpcuser=masternode2\n
-rpcpassword=masternode2'\n
+rpcpassword=masternode2\n
 rpcport="$RPCPORT"\n
 rpcallowip=127.0.0.1\n
 maxconnections=64\n
@@ -66,14 +66,14 @@ connect=177.38.215.55:5784\n
 connect=177.38.215.56:5784\n
 connect=177.38.215.61:5784\n
 #----\n
-#listen=1\n
-#server=1\n
-#daemon=1\n
+listen=1\n
+server=1\n
+daemon=1\n
 #----\n
-#masternode=1\n
-#masternodeblsprivkey="$PRIVATE_KEY"\n
-#externalip="$IP"\n
-#bind="$IP
+masternode=1\n
+masternodeblsprivkey="$PRIVATE_KEY"\n
+externalip="$IP"\n
+bind="$IP
 
 sudo touch /home/nm02/.lqxcore/lqx.conf
 sudo chmod 777 /home/nm02/.lqxcore/lqx.conf

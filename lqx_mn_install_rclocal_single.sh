@@ -103,7 +103,7 @@ echo "====================="
 echo " "
 
 IP=`wget -qO- ifconfig.co/ip`
-PRIVATE_KEY="teste"
+PRIVATE_KEY="138e709fc8bcb050e1803fdc63a723948b3a44688c184b1289a3c157f7097d1c"
 RPCPORT="9997"
 
 TEXTO="#----\n
@@ -117,14 +117,14 @@ connect=177.38.215.55:5784\n
 connect=177.38.215.56:5784\n
 connect=177.38.215.61:5784\n
 #----\n
-#listen=1\n
-#server=1\n
-#daemon=1\n
+listen=1\n
+server=1\n
+daemon=1\n
 #----\n
-#masternode=1\n
-#masternodeblsprivkey="$PRIVATE_KEY"\n
-#externalip="$IP"\n
-#bind="$IP
+masternode=1\n
+masternodeblsprivkey="$PRIVATE_KEY"\n
+externalip="$IP"\n
+bind="$IP
 
 sudo touch /home/nm01/.lqxcore/lqx.conf
 sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
