@@ -6,3 +6,5 @@ curl -sL https://raw.githubusercontent.com/kayserp/lqx-mn-install/master/lqx_mn_
 
 curl -sL https://raw.githubusercontent.com/kayserp/lqx-mn-install/master/lqx_mn_uninstall_rclocal_multiples.sh | sudo -E bash -
 curl -sL https://raw.githubusercontent.com/kayserp/lqx-mn-install/master/lqx_mn_install_rclocal_multiples.sh | sudo -E bash -
+
+curl -sL https://raw.githubusercontent.com/kayserp/lqx-mn-install/master/lqx_mn_install_rclocal_single.sh | sudo -E bash -

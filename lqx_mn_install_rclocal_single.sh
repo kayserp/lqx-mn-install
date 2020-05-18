@@ -81,7 +81,7 @@ cd /tmp
 git clone https://github.com/kayserp/lqxcore-linux.git
 
 echo " "
-echo "Copiando arquivos para home de usuários..."
+echo "Copiando arquivos para o home do usuário..."
 
 sudo mkdir /home/nm01/.lqxcore
 
@@ -104,13 +104,15 @@ echo " "
 
 IP=`wget -qO- ifconfig.co/ip`
 PRIVATE_KEY="teste"
-#PRIVATE_KEY=~/.lqxcore/lqx-cli bls generate
+RPCPORT="9997"
 
 TEXTO="#----\n
 rpcuser=masternode1\n
 rpcpassword=masternode1\n
-rpcport=5783\n
+rpcport="$RPCPORT"\n
 rpcallowip=127.0.0.1\n
+maxconnections=64\n
+logtimestamps=1\n
 connect=177.38.215.55:5784\n
 connect=177.38.215.56:5784\n
 connect=177.38.215.61:5784\n
@@ -121,7 +123,8 @@ connect=177.38.215.61:5784\n
 #----\n
 #masternode=1\n
 #masternodeblsprivkey="$PRIVATE_KEY"\n
-#externalip="$IP
+#externalip="$IP"\n
+#bind="$IP
 
 sudo touch /home/nm01/.lqxcore/lqx.conf
 sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
