@@ -49,6 +49,7 @@ echo "====================="
 echo "Configurando lqx.conf"
 echo "====================="
 echo " "
+echo "Feito!"
 
 IP=`wget -qO- ifconfig.co/ip`
 PRIVATE_KEY="teste"
