@@ -121,8 +121,8 @@ sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 #exit 0
 EOF
 
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
-sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
+sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd" &
 
 echo " "
 echo "==================================================="
