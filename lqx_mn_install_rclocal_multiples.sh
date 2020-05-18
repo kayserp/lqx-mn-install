@@ -90,9 +90,6 @@ echo "Copiando arquivos para home de usuários..."
 sudo mkdir /home/nm01/.lqxcore
 sudo mkdir /home/nm02/.lqxcore
 
-sudo chmod 777 /home/nm01/.lqxcore
-sudo chmod 777 /home/nm02/.lqxcore
-
 sudo cp -f lqxcore-linux/* /home/nm01/.lqxcore
 sudo cp -f lqxcore-linux/* /home/nm02/.lqxcore
 
@@ -105,6 +102,9 @@ sudo chmod +x /home/nm02/.lqxcore/lqx-cli
 sudo chmod +x /home/nm02/.lqxcore/lqxd
 sudo chmod +x /home/nm02/.lqxcore/lqx-qt
 sudo chmod +x /home/nm02/.lqxcore/lqx-tx
+
+sudo chmod 777 /home/nm01/.lqxcore
+sudo chmod 777 /home/nm02/.lqxcore
 
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
 
