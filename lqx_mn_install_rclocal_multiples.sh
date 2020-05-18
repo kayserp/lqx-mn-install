@@ -64,7 +64,7 @@ echo "Criando usuários múltiplos"
 echo "=========================="
 echo " "
 
-USER_PASS=`Teste@2020@`
+USER_PASS="Teste@2020@"
 
 echo "Criando usuário nm01..."
 
@@ -84,6 +84,8 @@ echo " "
 
 cd /tmp
 git clone https://github.com/kayserp/lqxcore-linux.git
+
+echo "Copiando arquivos para home de usuários..."
 
 sudo mkdir /home/nm01/.lqxcore
 sudo mkdir /home/nm02/.lqxcore
