@@ -121,12 +121,12 @@ sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 #exit 0
 EOF
 
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
 
 echo " "
-echo "==================================================="
+echo "===================================================="
 echo "Inicializando LQX node 1 e criando conjunto de chaves"
-echo "==================================================="
+echo "===================================================="
 #echo " Aguarde 120 segundos..."
 
 sleep 120
@@ -171,14 +171,12 @@ sudo /home/nm02/.lqxcore/lqx-cli stop
 echo "Aguarde 30 segundos..."
 sleep 30
 
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
-
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
 
 echo " "
-echo "==================================================="
+echo "===================================================="
 echo "Inicializando LQX node 2 e criando conjunto de chaves"
-echo "==================================================="
+echo "===================================================="
 #echo " Aguarde 120 segundos..."
 
 sleep 120
@@ -223,7 +221,7 @@ sudo /home/nm02/.lqxcore/lqx-cli stop
 echo "Aguarde 30 segundos..."
 sleep 30
 
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
+sudo -H -u nm02 bash -c "/home/nm01/.lqxcore/lqxd"
 
 echo " "
 echo "=========================="
