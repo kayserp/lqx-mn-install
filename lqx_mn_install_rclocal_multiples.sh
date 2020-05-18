@@ -170,8 +170,9 @@ sudo /home/nm01/.lqxcore/lqx-cli stop
 sudo /home/nm02/.lqxcore/lqx-cli stop
 echo "Aguarde 30 segundos..."
 sleep 30
-sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
-sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
+
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
+sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd" &
 
 echo " "
 echo "=========================="
