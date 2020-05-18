@@ -69,8 +69,12 @@ USER_PASS=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo ""`
 sudo useradd -U -m nm01 -s /bin/bash
 echo "nm01:${USER_PASS}" | sudo chpasswd
 
+echo "Criando usuário nm01..."
+
 sudo useradd -U -m nm02 -s /bin/bash
 echo "nm02:${USER_PASS}" | sudo chpasswd
+
+echo "Criando usuário nm02..."
 
 echo " "
 echo "================="
