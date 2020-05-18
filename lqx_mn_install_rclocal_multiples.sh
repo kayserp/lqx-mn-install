@@ -122,11 +122,10 @@ sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 EOF
 
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
-sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd" &
 
 echo " "
 echo "==================================================="
-echo "Inicializando LQX node e criando conjunto de chaves"
+echo "Inicializando LQX node 1 e criando conjunto de chaves"
 echo "==================================================="
 #echo " Aguarde 120 segundos..."
 
@@ -146,6 +145,7 @@ TEXTO="#----\n
 rpcuser=masternode1\n
 rpcpassword=masternode1\n
 rpcallowip=127.0.0.1\n
+rpcport=5783
 connect=177.38.215.55:5784
 connect=177.38.215.56:5784
 connect=177.38.215.61:5784
@@ -172,7 +172,58 @@ echo "Aguarde 30 segundos..."
 sleep 30
 
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
-sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd" &
+
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
+
+echo " "
+echo "==================================================="
+echo "Inicializando LQX node 2 e criando conjunto de chaves"
+echo "==================================================="
+#echo " Aguarde 120 segundos..."
+
+sleep 120
+
+echo " "
+echo "====================="
+echo "Configurando lqx.conf"
+echo "====================="
+echo " "
+
+IP=`wget -qO- ifconfig.co/ip`
+PRIVATE_KEY="teste"
+#PRIVATE_KEY=~/.lqxcore/lqx-cli bls generate
+
+TEXTO="#----\n
+rpcuser=masternode2\n
+rpcpassword=masternode2\n
+rpcallowip=127.0.0.1\n
+rpcport=5782
+connect=177.38.215.55:5784
+connect=177.38.215.56:5784
+connect=177.38.215.61:5784
+#----\n
+#listen=1\n
+#server=1\n
+#daemon=1\n
+#----\n
+#masternode=1\n
+#masternodeblsprivkey="$PRIVATE_KEY"\n
+#externalip="$IP
+
+sudo touch /home/nm01/.lqxcore/lqx.conf
+sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
+sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
+
+sudo touch /home/nm02/.lqxcore/lqx.conf
+sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
+sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
+
+sudo /home/nm01/.lqxcore/lqx-cli stop
+sudo /home/nm02/.lqxcore/lqx-cli stop
+echo "Aguarde 30 segundos..."
+sleep 30
+
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd" &
 
 echo " "
 echo "=========================="
