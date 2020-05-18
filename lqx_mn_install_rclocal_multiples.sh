@@ -82,13 +82,18 @@ sudo mkdir /home/nm02/.lqxcore
 sudo chmod 777 /home/nm01/.lqxcore
 sudo chmod 777 /home/nm02/.lqxcore
 
-sudo chmod +x lqxcore/lqx-cli
-sudo chmod +x lqxcore/lqxd
-sudo chmod +x lqxcore/lqx-qt
-sudo chmod +x lqxcore/lqx-tx
-
 sudo cp -f lqxcore-linux/* /home/nm01/.lqxcore
 sudo cp -f lqxcore-linux/* /home/nm02/.lqxcore
+
+sudo chmod +x /home/nm01/.lqxcore/lqx-cli
+sudo chmod +x /home/nm01/.lqxcore/lqxd
+sudo chmod +x /home/nm01/.lqxcore/lqx-qt
+sudo chmod +x /home/nm01/.lqxcore/lqx-tx
+
+sudo chmod +x /home/nm02/.lqxcore/lqx-cli
+sudo chmod +x /home/nm02/.lqxcore/lqxd
+sudo chmod +x /home/nm02/.lqxcore/lqx-qt
+sudo chmod +x /home/nm02/.lqxcore/lqx-tx
 
 echo " "
 echo "=================================="
@@ -116,8 +121,8 @@ sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 #exit 0
 EOF
 
-#sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
-#sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
+sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 
 echo " "
 echo "==================================================="
@@ -125,7 +130,7 @@ echo "Inicializando LQX node e criando conjunto de chaves"
 echo "==================================================="
 #echo " Aguarde 120 segundos..."
 
-#sleep 120
+sleep 120
 
 echo " "
 echo "====================="
@@ -153,18 +158,20 @@ connect=177.38.215.61:5784
 #masternodeblsprivkey="$PRIVATE_KEY"\n
 #externalip="$IP
 
-#sudo touch /home/nm01/.lqxcore/lqx.conf
-#sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
-#sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
+sudo touch /home/nm01/.lqxcore/lqx.conf
+sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
+sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
 
-#sudo touch /home/nm02/.lqxcore/lqx.conf
-#sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
-#sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
+sudo touch /home/nm02/.lqxcore/lqx.conf
+sudo chmod 777 /home/nm01/.lqxcore/lqx.conf
+sudo echo -e $TEXTO >> /home/nm01/.lqxcore/lqx.conf
 
-#sudo ~/.lqxcore/lqx-cli stop
-#echo "Aguarde 30 segundos..."
-#sleep 30
-#sudo ~/.lqxcore/lqxd
+sudo /home/nm01/.lqxcore/lqx-cli stop
+sudo /home/nm02/.lqxcore/lqx-cli stop
+echo "Aguarde 30 segundos..."
+sleep 30
+sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
+sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd"
 
 echo " "
 echo "=========================="
