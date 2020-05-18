@@ -102,7 +102,7 @@ echo "Configurando lqx.conf"
 echo "====================="
 echo " "
 
-IP=`wget -qO- ifconfig.co/ip`
+IP="152.44.40.73"
 PRIVATE_KEY="138e709fc8bcb050e1803fdc63a723948b3a44688c184b1289a3c157f7097d1c"
 RPCPORT="9997"
 
