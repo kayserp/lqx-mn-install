@@ -77,7 +77,8 @@ echo "Baixando LQX Core"
 echo "================="
 echo " "
 
-cd /tmp
+sudo mkdir /temp
+cd /temp
 git clone https://github.com/kayserp/lqxcore-linux.git
 
 echo " "

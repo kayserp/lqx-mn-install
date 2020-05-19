@@ -77,7 +77,7 @@ echo "==================================================="
 
 sudo -H -u nm04 bash -c "/home/nm04/.lqxcore/lqxd" &
 
-COMANDO="sudo -H -u nm04 bash -c "/home/nm04/.lqxcore/lqxd""
+COMANDO='sudo -H -u nm04 bash -c "/home/nm04/.lqxcore/lqxd"'
 sudo echo -e $COMANDO >> /etc/rc.local
 
 echo " "
