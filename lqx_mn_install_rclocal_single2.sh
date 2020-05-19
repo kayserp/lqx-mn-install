@@ -51,7 +51,7 @@ echo "====================="
 echo " "
 echo "Feito!"
 
-IP="152.44.40.253"
+IP="209.50.54.26"
 PRIVATE_KEY="57b48bb6552b49384113a3178e9f42238fdb8be6841b52da0d12ac395232533f"
 RPCPORT="9998"
 
@@ -85,6 +85,9 @@ echo "Inicializando LQX node e criando conjunto de chaves"
 echo "==================================================="
 
 sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd" &
+
+COMANDO="sudo -H -u nm02 bash -c "/home/nm02/.lqxcore/lqxd""
+sudo echo -e $COMANDO >> /etc/rc.local
 
 echo " "
 echo "====================="
