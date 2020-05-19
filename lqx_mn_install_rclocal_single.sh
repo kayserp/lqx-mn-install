@@ -77,8 +77,8 @@ echo "Baixando LQX Core"
 echo "================="
 echo " "
 
-sudo mkdir /temp
-cd /temp
+sudo mkdir /tmp
+cd /tmp
 git clone https://github.com/kayserp/lqxcore-linux.git
 
 echo " "
@@ -173,7 +173,6 @@ sudo tee /etc/rc.local <<EOF
 
 sudo -H -u nm01 bash -c "/home/nm01/.lqxcore/lqxd"
 
-#exit 0
 EOF
 
 echo " "
