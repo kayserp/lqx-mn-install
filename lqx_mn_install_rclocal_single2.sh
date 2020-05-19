@@ -20,15 +20,6 @@ sudo useradd -U -m nm02 -s /bin/bash
 echo "nm02:${USER_PASS}" | sudo chpasswd
 
 echo " "
-echo "================="
-echo "Baixando LQX Core"
-echo "================="
-echo " "
-
-cd /tmp
-git clone https://github.com/kayserp/lqxcore-linux.git
-
-echo " "
 echo "Copiando arquivos para o home do usuário..."
 
 sudo mkdir /home/nm02/.lqxcore
