@@ -88,7 +88,7 @@ sudo tee /etc/rc.local <<EOF
 #
 # In order to enable or disable this script just change the execution
 # bits.
-#
+#a
 # By default this script does nothing.
 
 ~/.lqxcore/lqxd
